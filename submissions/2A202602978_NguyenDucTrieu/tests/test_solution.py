@@ -25,6 +25,28 @@ class Tiny(nn.Module):
     def get_classifier(self): return self.head
 
 class SolutionTests(unittest.TestCase):
+    def test_sanity_serializes_boolean_on_pass_and_failure(self):
+        import json
+        import prepare
+        df = pd.DataFrame({'Filename':['a.jpg'], 'Label':[0]})
+        batch = (torch.zeros(1,3,8,8), torch.zeros(1,dtype=torch.long), ['a.jpg'])
+        for initial, expected in [(float(np.log(9)), True), (10., False)]:
+            with self.subTest(initial=initial), tempfile.TemporaryDirectory() as output:
+                with patch('prepare.load_split', return_value=(df,df,df)), \
+                     patch('prepare.make_loader', return_value=[batch]), \
+                     patch('model.build_model', return_value=Tiny()), \
+                     patch('torch.cuda.is_available', return_value=False), \
+                     patch('torch.nn.functional.cross_entropy', side_effect=[
+                         torch.tensor(initial), torch.tensor(.01, requires_grad=True)]):
+                    if expected:
+                        prepare.sanity('unused', output)
+                    else:
+                        with self.assertRaisesRegex(RuntimeError, 'Pipeline check'):
+                            prepare.sanity('unused', output)
+                saved = json.loads((Path(output)/'sanity.json').read_text())
+                self.assertIs(saved['initial_ce_near_uniform'], expected)
+                self.assertIs(saved['passed'], True)
+
     def test_focal_gamma_zero(self):
         x=torch.randn(13,9,requires_grad=True); y=torch.randint(9,(13,))
         a=FocalLoss(0)(x,y); b=nn.CrossEntropyLoss()(x,y)

@@ -99,8 +99,8 @@ def sanity(data='data',output='eda',backbone='resnet50'):
         loss = torch.nn.functional.cross_entropy(model(x),y)
         loss.backward(); optimizer.step(); losses.append(loss.item())
         if loss.item()<.02: break
-    result = dict(initial_ce=initial,uniform_ce=float(np.log(9)),final_loss=losses[-1],
-                  steps=len(losses),passed=losses[-1]<.02,initial_ce_near_uniform=abs(initial-np.log(9))<1.)
+    result = dict(initial_ce=float(initial),uniform_ce=float(np.log(9)),final_loss=float(losses[-1]),
+                  steps=int(len(losses)),passed=bool(losses[-1]<.02),initial_ce_near_uniform=bool(abs(initial-np.log(9))<1.))
     out = Path(output); out.mkdir(parents=True,exist_ok=True)
     (out/'sanity.json').write_text(json.dumps(result,indent=2))
     if not result['passed'] or not result['initial_ce_near_uniform']:
