@@ -16,7 +16,7 @@ Notebook chính: `code/lab_day2.ipynb`, lấy trực tiếp từ mẫu `starter/
 
 Lệnh `mkdir -p .../submissions/...` và `cp -r .../starter .../code` trong hướng dẫn dùng để khởi tạo bài làm. Thư mục code ở repo này đã hoàn thiện nên bỏ qua bước sao chép, tránh ghi đè bằng bộ khung. Nếu repo đã clone từ trước, cập nhật bằng `git -C <REPO_DIR> pull --ff-only` trước khi import module; nếu đã import mã cũ, khởi động lại kernel.
 
-**Link notebook chạy thật:** [Kaggle Notebook](hhttps://www.kaggle.com/code/nguynctriu897/lab02-nguyenductrieu-2a202602978) *(Đã chạy toàn bộ các ô từ Bước 0 đến Bước 5 trên GPU Kaggle và xuất đầy đủ sản phẩm)*.
+**Link notebook chạy thật:** [Kaggle Notebook](https://www.kaggle.com/code/nguynctriu897/lab02-nguyenductrieu-2a202602978) *(Đã chạy toàn bộ các ô từ Bước 0 đến Bước 5 trên GPU Kaggle và xuất đầy đủ sản phẩm)*.
 
 ### Tiếp tục khi phiên ngắt
 
