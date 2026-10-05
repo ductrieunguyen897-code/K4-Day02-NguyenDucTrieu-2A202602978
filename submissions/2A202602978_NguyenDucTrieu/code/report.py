@@ -100,7 +100,7 @@ def generate(root):
                 for cell in col[1:]:
                     if isinstance(cell.value,float): cell.number_format='0.0000'
             metric='macro_f1_val' if 'macro_f1_val' in df else 'macro_f1' if 'macro_f1' in df else None
-            if metric and not df.empty:
+            if metric and not df.empty and df[metric].notna().any():
                 index=df[metric].astype(float).idxmax()
                 position=df.index.get_loc(index)+2
                 for cell in ws[position]: cell.fill=PatternFill('solid',fgColor='D5F5E3')

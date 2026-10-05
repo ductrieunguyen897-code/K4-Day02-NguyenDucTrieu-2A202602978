@@ -185,13 +185,15 @@ def final_stage(root):
         save_predictions(target,names,y,p)
         dump(receipt,dict(method=method_used,temperature=temperature,
                          sha256=hashlib.sha256(target.read_bytes()).hexdigest()))
-    eval_script=next(p/'eval.py' for p in Path(__file__).resolve().parents if (p/'eval.py').exists())
+    eval_candidates = [p/'eval.py' for p in [Path.cwd(), *Path(__file__).resolve().parents]] + [Path(p)/'eval.py' for p in sys.path]
+    eval_script = next(p for p in eval_candidates if p.exists())
     common=['--test-csv',str(Path(selected.labels_dir)/'test_subset0.csv'),'--labels',str(Path(selected.labels_dir)/'labels.csv')]
     for exp in ['T00','F01']:
         subprocess.run([sys.executable,str(eval_script),'score','--pred',str(root/'predictions'/f'{exp}_seed*_test.csv'),
                         *common,'--tag',exp,'--out',str(root/'eval_out')],check=True)
     command=[sys.executable,str(eval_script),'grade','--final',str(root/'predictions/F01_seed*_test.csv'),
-             '--baseline',str(root/'predictions/T00_seed*_test.csv'),'--final-val',str(root/'predictions/F01_seed*_val.csv'),*common]
+             '--baseline',str(root/'predictions/T00_seed*_test.csv'),'--final-val',str(root/'predictions/F01_seed*_val.csv'),
+             '--val-csv',str(Path(selected.labels_dir)/'val_subset0.csv'),*common]
     if method=='temperature': command+=['--uncal',str(root/'predictions/F01_uncal_seed*_test.csv')]
     grade=subprocess.run(command,check=True,capture_output=True,text=True)
     (root/'grade.txt').write_text(grade.stdout); print(grade.stdout)

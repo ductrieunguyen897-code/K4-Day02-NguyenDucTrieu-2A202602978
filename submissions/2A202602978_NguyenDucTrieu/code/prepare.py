@@ -51,7 +51,9 @@ def eda(data='data', output='eda'):
     counts.index = names
     counts.to_csv(out/'class_counts.csv')
     counts.plot.bar(figsize=(12,5)); plt.ylabel('Images'); plt.tight_layout()
-    plt.savefig(out/'class_counts.png',dpi=150); plt.close()
+    plt.savefig(out/'class_counts.png',dpi=150)
+    plt.savefig(out/'class_distribution.png',dpi=150)
+    plt.close()
     stats['imbalance_ratio'] = float(counts.sum(axis=1).max()/counts.sum(axis=1).min())
     # Visual examples and image statistics use training data only.
     shapes = {}
@@ -60,6 +62,14 @@ def eda(data='data', output='eda'):
             key = f'{img.size}/{img.mode}'
             shapes[key] = shapes.get(key,0)+1
     stats['train_image_shapes_modes'] = shapes
+    stats['train_img_size'] = '(256, 256)'
+    stats['train_channels'] = 3
+    if shapes:
+        first_key = list(shapes.keys())[0]
+        if '/' in first_key:
+            stats['train_img_size'] = first_key.split('/')[0]
+            mode = first_key.split('/')[1]
+            stats['train_channels'] = 3 if mode == 'RGB' else 1
     fig,axes = plt.subplots(9,3,figsize=(9,24))
     for label in range(9):
         sample = frames[0][frames[0].Label==label].sample(3,random_state=0)

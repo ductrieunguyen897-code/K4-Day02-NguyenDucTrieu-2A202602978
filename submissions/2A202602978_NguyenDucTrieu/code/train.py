@@ -225,7 +225,10 @@ def run(cfg):
     val_criterion = build_criterion('ce')
     optimizer = build_optimizer(model,cfg)
     scheduler = build_scheduler(optimizer,cfg,len(train_loader))
-    scaler = torch.amp.GradScaler('cuda',enabled=cfg.amp and device.type=='cuda')
+    if hasattr(torch, 'amp') and hasattr(torch.amp, 'GradScaler'):
+        scaler = torch.amp.GradScaler('cuda', enabled=cfg.amp and device.type=='cuda')
+    else:
+        scaler = torch.cuda.amp.GradScaler(enabled=cfg.amp and device.type=='cuda')
     ema = EMA(model,cfg.ema_decay) if cfg.ema_decay is not None else None
     history,best,best_epoch,start = [],-1.,0,1
     if cfg.resume and (rd/'last.pt').exists():

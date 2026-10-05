@@ -8,7 +8,7 @@
 
 Notebook chính: `code/lab_day2.ipynb`, lấy trực tiếp từ mẫu `starter/lab_day2.ipynb`. Giữ nguyên tất cả ô Markdown, ô tải dữ liệu và ô `eval.py score/grade`; điền các ô TODO. Ô môi trường cài thư viện và clone repo GitHub của người học.
 
-1. Commit và push mã bài làm mới trong `submissions/2A202602978_NguyenDucTrieu/` lên repo `https://github.com/ductrieunguyen897-code/K4-Day02-NguyenDucTRieu-2A202602978`. File đang có trên máy local không tự xuất hiện trong bản clone trên Kaggle/Colab. Trợ lý chưa commit/push thay bạn.
+1. Commit và push mã bài làm mới trong `submissions/2A202602978_NguyenDucTrieu/` lên repo `https://github.com/ductrieunguyen897-code/K4-Day02-NguyenDucTrieu-2A202602978`. File đang có trên máy local không tự xuất hiện trong bản clone trên Kaggle/Colab. Trợ lý chưa commit/push thay bạn.
 2. Import `code/lab_day2.ipynb` vào Kaggle hoặc Colab. Bật GPU; trên Kaggle bật Internet.
 3. Chạy ô cài đặt: notebook tự `git clone` nếu chưa có repo, rồi import mã từ thư mục bài nộp `submissions/2A202602978_NguyenDucTrieu/code`. Không cần Add Input hoặc upload ZIP mã nguồn.
 4. Chạy lần lượt các ô theo mẫu: tải dữ liệu → Bước 0–5. Kết quả ở `/kaggle/working` (Kaggle) hoặc `/content` (Colab).
