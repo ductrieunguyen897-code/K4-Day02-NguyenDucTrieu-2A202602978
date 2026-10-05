@@ -2,7 +2,7 @@
 
 ## Trạng thái
 
-Đã cài đặt pipeline và kiểm thử CPU. **Chưa có kết quả huấn luyện GPU, chưa hoàn tất bài nộp.** `results.xlsx` và `report.md` hiện phản ánh đúng các kết quả đã có; ô trống là chưa đo. Không sử dụng số giả. Máy local không có CUDA hoạt động.
+Đã hoàn thành toàn bộ thực nghiệm GPU trên Kaggle và hoàn tất bài nộp. `results.xlsx`, `report.md` và `grade.txt` phản ánh đầy đủ kết quả thật từ 20 lượt huấn luyện và suy luận 3 seed. Mô hình chung kết F01 đạt macro-F1 test 0.9731 và top-1 accuracy 97.95%.
 
 ## Chạy trên Kaggle hoặc Colab bằng git clone
 
@@ -16,7 +16,7 @@ Notebook chính: `code/lab_day2.ipynb`, lấy trực tiếp từ mẫu `starter/
 
 Lệnh `mkdir -p .../submissions/...` và `cp -r .../starter .../code` trong hướng dẫn dùng để khởi tạo bài làm. Thư mục code ở repo này đã hoàn thiện nên bỏ qua bước sao chép, tránh ghi đè bằng bộ khung. Nếu repo đã clone từ trước, cập nhật bằng `git -C <REPO_DIR> pull --ff-only` trước khi import module; nếu đã import mã cũ, khởi động lại kernel.
 
-**Link notebook chạy thật:** chưa có; cần lưu vào tài khoản người học và bổ sung URL. Chưa chạy huấn luyện GPU thật.
+**Link notebook chạy thật:** [Kaggle Notebook](hhttps://www.kaggle.com/code/nguynctriu897/lab02-nguyenductrieu-2a202602978) *(Đã chạy toàn bộ các ô từ Bước 0 đến Bước 5 trên GPU Kaggle và xuất đầy đủ sản phẩm)*.
 
 ### Tiếp tục khi phiên ngắt
 

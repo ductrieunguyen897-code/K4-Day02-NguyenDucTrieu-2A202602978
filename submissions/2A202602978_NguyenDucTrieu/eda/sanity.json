@@ -1,0 +1,8 @@
+{
+  "initial_ce": 2.176769256591797,
+  "uniform_ce": 2.1972245773362196,
+  "final_loss": 0.01978057064116001,
+  "steps": 15,
+  "passed": true,
+  "initial_ce_near_uniform": true
+}
